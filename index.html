@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo Cenepeña · Catálogo de Alimentos</title>
+<meta name="description" content="Distribuidora mayorista de alimentos latinos en Madrid. Yerba mate, dulces, harinas, fideos, bebidas y más.">
+<style>
+:root{
+  --verde:#2f6d4f; --verde-osc:#234f3a; --verde-claro:#e7f1ea;
+  --oro:#e0a80d; --oro-osc:#c8940a; --terra:#c25a2b;
+  --crema:#faf6ee; --tinta:#2a2521; --gris:#6c655d; --linea:#e7ded0;
+  --wa:#25d366; --wa-osc:#1da851;
+  --sombra:0 4px 16px rgba(40,30,15,.10); --radio:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--crema); color:var(--tinta); line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+header{background:#FFC107;color:#3a2c05;padding:18px 16px 20px}
+.hwrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:94px;height:94px;border-radius:50%;flex:0 0 auto;filter:drop-shadow(0 3px 8px rgba(0,0,0,.28))}
+.brand h1{font-size:1.5rem;letter-spacing:.5px;line-height:1.1}
+.brand .sl{color:#234f3a;font-weight:800}
+.brand p{font-size:.9rem;opacity:.92;margin-top:2px}
+.hcontact{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;border:none;cursor:pointer;font-weight:700;
+  font-size:.9rem;padding:10px 15px;border-radius:999px;text-decoration:none;transition:.15s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-wa{background:var(--wa);color:#fff}.btn-wa:hover{background:var(--wa-osc)}
+.hbadge{max-width:1200px;margin:12px auto 0;display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem}
+.hbadge span{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.10);padding:5px 12px;border-radius:999px}
+.controls{position:sticky;top:0;z-index:40;background:var(--crema);border-bottom:1px solid var(--linea);
+  padding:12px 16px;box-shadow:0 2px 10px rgba(40,30,15,.05)}
+.cwrap{max-width:1200px;margin:0 auto}
+.search{position:relative;margin-bottom:10px}
+.search input{width:100%;padding:13px 44px 13px 42px;border:1.5px solid var(--linea);border-radius:999px;
+  font-size:1rem;background:#fff;outline:none;transition:.15s}
+.search input:focus{border-color:var(--verde)}
+.search .ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);opacity:.5}
+.search .clr{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:none;background:#eee;
+  border-radius:50%;width:24px;height:24px;cursor:pointer;display:none;font-size:14px;line-height:1}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{height:5px}.chips::-webkit-scrollbar-thumb{background:var(--linea);border-radius:9px}
+.chip{flex:0 0 auto;border:1.5px solid var(--linea);background:#fff;color:var(--gris);padding:8px 15px;
+  border-radius:999px;font-size:.88rem;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:var(--verde);color:var(--verde)}
+.chip.active{background:var(--verde);border-color:var(--verde);color:#fff}
+.chip .n{opacity:.7;font-weight:700;margin-left:3px}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 40px}
+.count{font-size:.85rem;color:var(--gris);margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--sombra);transition:.18s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(40,30,15,.14)}
+.card .ph{background:#fff;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:12px;border-bottom:1px solid var(--linea)}
+.card .ph img{max-height:100%;object-fit:contain}
+.card .body{padding:12px 13px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--terra);font-weight:800}
+.card h3{font-size:.98rem;line-height:1.25}
+.card .fmt{display:inline-block;align-self:flex-start;background:var(--verde-claro);color:var(--verde-osc);
+  font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:6px}
+.card .desc{font-size:.82rem;color:var(--gris);flex:1}
+.card .price{font-weight:800;color:var(--verde-osc);font-size:.92rem;margin-top:2px}
+.age{display:flex;align-items:center;gap:6px;background:#fdeaea;color:#9e2b2b;border:1px solid #f2c2c2;
+  font-size:.74rem;font-weight:700;padding:5px 8px;border-radius:8px}
+.card .acts{margin-top:auto}
+.qrow{display:flex;flex-direction:column;gap:5px}
+.qlbl{font-size:.72rem;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.4px}
+.qrow.on .qlbl{color:var(--verde)}
+.qunit{width:100%;height:38px;border:1.5px solid var(--linea);border-radius:10px;padding:0 10px;
+  font-size:.9rem;font-weight:600;color:var(--tinta);background:#fff;cursor:pointer}
+.qunit:focus{outline:none;border-color:var(--verde)}
+.qstep{display:flex;align-items:center;gap:6px}
+.qstep button.qb{width:42px;height:42px;border:1.5px solid var(--verde);background:var(--verde-claro);color:var(--verde-osc);
+  border-radius:10px;font-size:22px;font-weight:800;cursor:pointer;flex:0 0 auto;line-height:1;padding:0}
+.qstep button.qb:hover{background:var(--verde);color:#fff}
+.qstep button.qb:active{transform:scale(.95)}
+.qstep input{flex:1;min-width:0;width:100%;text-align:center;font-size:1.15rem;font-weight:800;color:var(--verde-osc);
+  border:1.5px solid var(--linea);border-radius:10px;height:42px;padding:0 2px;-moz-appearance:textfield}
+.qstep input:focus{border-color:var(--verde);outline:none}
+.qrow.on .qstep input{border-color:var(--verde);background:var(--verde-claro)}
+.qstep input::-webkit-outer-spin-button,.qstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.empty{text-align:center;padding:60px 20px;color:var(--gris)}
+.how{background:var(--verde-claro);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:38px 16px}
+.how .in{max-width:1100px;margin:0 auto}
+.how h2{color:var(--verde-osc);font-size:1.4rem;margin-bottom:6px}
+.how .sub{color:var(--gris);margin-bottom:22px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.step{background:#fff;border-radius:var(--radio);padding:18px;box-shadow:var(--sombra)}
+.step .num{width:34px;height:34px;border-radius:50%;background:var(--oro);color:#3a2c05;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step h4{font-size:1rem;margin-bottom:4px}.step p{font-size:.86rem;color:var(--gris)}
+.how .info{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.how .info div{background:#fff;border-radius:12px;padding:14px 16px;font-size:.88rem}
+.how .info b{color:var(--verde-osc)}
+footer{background:var(--verde-osc);color:#e9f0ea;padding:34px 16px 90px}
+.fwrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.fwrap h4{color:#fff;margin-bottom:10px;font-size:1.05rem}
+.fwrap a{color:#e9f0ea;text-decoration:none;font-size:.9rem;display:inline-flex;gap:7px;align-items:center;margin-bottom:7px}
+.fwrap a:hover{color:var(--oro)}
+.fwrap p{font-size:.88rem;opacity:.9;margin-bottom:6px}
+.flogo{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.flogo img{width:58px;height:58px;border-radius:50%}
+.copy{max-width:1100px;margin:22px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:.78rem;opacity:.75;text-align:center}
+.legal{max-width:1100px;margin:14px auto 0;font-size:.8rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;padding:10px 14px}
+.fab{position:fixed;right:18px;bottom:18px;z-index:60;background:var(--wa);color:#fff;width:58px;height:58px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.28);text-decoration:none;transition:.15s}
+.fab:hover{background:var(--wa-osc);transform:scale(1.06)}
+.fab svg{width:30px;height:30px}
+.cartbar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:2px solid var(--verde);
+  box-shadow:0 -4px 18px rgba(40,30,15,.14);transform:translateY(110%);transition:.25s;padding:12px 16px}
+.cartbar.show{transform:translateY(0)}
+.cartbar .cin{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cartbar .lbl{font-weight:800;color:var(--verde-osc)}
+.cartbar .lbl span{color:var(--terra)}
+.cartbar .cbtns{margin-left:auto;display:flex;gap:8px}
+.btn-open{background:var(--verde-claro);color:var(--verde-osc);border:1px solid var(--verde)}
+.overlay{position:fixed;inset:0;background:rgba(30,20,10,.5);z-index:70;display:none;align-items:flex-end;justify-content:center}
+.overlay.show{display:flex}
+.modal{background:var(--crema);width:100%;max-width:560px;max-height:88vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;animation:up .25s}
+@keyframes up{from{transform:translateY(30px);opacity:.6}to{transform:translateY(0);opacity:1}}
+@media(min-width:600px){.overlay{align-items:center}.modal{border-radius:20px}}
+.modal .mh{padding:16px 18px;border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:10px}
+.modal .mh h3{font-size:1.15rem;color:var(--verde-osc);flex:1}
+.modal .mh button{border:none;background:#eee;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px}
+.modal .ml{overflow-y:auto;padding:8px 14px;flex:1}
+.qitem{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:9px 11px;margin-bottom:9px}
+.qitem img{width:48px;height:48px;object-fit:contain;flex:0 0 auto}
+.qitem .qi{flex:1;min-width:0}
+.qitem .qi b{font-size:.9rem;display:block;line-height:1.2}
+.qitem .qi small{color:var(--gris);font-size:.76rem}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:28px;height:28px;border:1px solid var(--linea);background:#fff;border-radius:8px;font-size:16px;cursor:pointer;font-weight:700;color:var(--verde-osc)}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.qitem .rm{border:none;background:none;color:var(--terra);cursor:pointer;font-size:.8rem;font-weight:700}
+.modal .mf{padding:14px 18px;border-top:1px solid var(--linea)}
+.bizrow{margin-bottom:10px}
+.bizrow label{display:block;font-size:.8rem;font-weight:700;color:var(--verde-osc);margin-bottom:5px}
+.bizrow input{width:100%;padding:12px 14px;border:1.5px solid var(--linea);border-radius:10px;font-size:1rem;outline:none}
+.bizrow input:focus{border-color:var(--verde)}
+.bizrow.err input{border-color:var(--terra);background:#fdeaea}
+.modal .mf .btn{width:100%;justify-content:center;padding:14px;font-size:1rem}
+.mf .note{font-size:.78rem;color:var(--gris);margin-top:8px;text-align:center}
+.mempty{text-align:center;color:var(--gris);padding:40px 20px}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff}
+  .controls,.fab,.cartbar,.overlay,.hcontact,.card .acts{display:none!important}
+  header{padding:14px 16px}
+  .hbadge{color:#1a1a1a}.hbadge span{background:#eee}
+  main{padding:14px 10px}.count{display:none}
+  .grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .card{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ccc;transform:none!important}
+  .card .ph{padding:8px}
+  .how{background:#fff;padding:20px 10px}.step{box-shadow:none;border:1px solid #ddd}
+  footer{padding:22px 16px}
+  @page{margin:11mm}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <img class="logo" src="img/logo.jpg" alt="Grupo Cenepeña">
+    <div class="brand">
+      <h1>Grupo Cenepeña <span class="sl">S.L.</span></h1>
+      <p>Distribuidora mayorista de alimentos latinos · Madrid, España</p>
+    </div>
+    <div class="hcontact">
+      <a class="btn btn-wa" href="https://wa.me/34722176155?text=Hola%20Grupo%20Cenepe%C3%B1a%2C%20quisiera%20informaci%C3%B3n%20de%20productos" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.7-.9c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.1.1.6-.1 1.3z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hbadge">
+    <span>🚚 Envío sin cargo (según zona)</span>
+    <span>📦 Venta mayorista</span>
+    <span>🌎 Productos importados</span>
+  </div>
+</header>
+<div class="controls">
+  <div class="cwrap">
+    <div class="search">
+      <span class="ic">🔍</span>
+      <input id="q" type="search" placeholder="Buscar producto… (ej. yerba, cerveza, harina)" autocomplete="off">
+      <button class="clr" id="clr" aria-label="Limpiar">✕</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+<main>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none"><p style="font-size:2.4rem">🔎</p><p>No encontramos productos con esa búsqueda.</p></div>
+</main>
+<section class="how" id="como-pedir">
+  <div class="in">
+    <h2>¿Cómo hacer tu pedido?</h2>
+    <p class="sub">Somos distribuidora mayorista. Hacé tu pedido en 3 pasos simples.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4>Elegí cantidades</h4><p>En cada producto poné la cantidad y la presentación (unidad, caja o display).</p></div>
+      <div class="step"><div class="num">2</div><h4>Enviá la cotización</h4><p>Poné tu nombre comercial y mandá la lista por WhatsApp. Te confirmamos precios y stock.</p></div>
+      <div class="step"><div class="num">3</div><h4>Coordinamos la entrega</h4><p>Acordamos forma de pago y te enviamos el pedido. Envío sin cargo según zona.</p></div>
+    </div>
+    <div class="info">
+      <div><b>🛒 Pedido mínimo:</b> a consultar según producto y zona.</div>
+      <div><b>📍 Zonas de entrega:</b> Madrid y provincia · resto de España a consultar.</div>
+      <div><b>💬 Atención:</b> WhatsApp +34 722 176 155</div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="fwrap">
+    <div>
+      <div class="flogo"><img src="img/logo.jpg" alt=""><div><b>Grupo Cenepeña S.L.</b><br><small>Import &amp; Export</small></div></div>
+      <p>Distribuidora mayorista de alimentos latinoamericanos con sede en Madrid, España.</p>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a href="https://wa.me/34722176155" target="_blank" rel="noopener">💬 WhatsApp: +34 722 176 155</a>
+      <a href="https://instagram.com/grupocenepena.es" target="_blank" rel="noopener">📸 @grupocenepena.es</a>
+    </div>
+    <div>
+      <h4>Ubicación</h4>
+      <p>📍 Madrid, España</p>
+    </div>
+  </div>
+  <div class="legal">🔞 <b>Bebidas con alcohol:</b> la venta de cerveza y bebidas alcohólicas está permitida únicamente a personas mayores de 18 años. Al solicitarlas, el cliente declara ser mayor de edad. Bebe con moderación.</div>
+  <div class="copy">© <span id="yr"></span> Grupo Cenepeña S.L. · Catálogo orientativo. Precios e imágenes sujetos a disponibilidad. Presentaciones pueden variar.</div>
+</footer>
+<a class="fab" id="fab" href="https://wa.me/34722176155?text=Hola%20Grupo%20Cenepe%C3%B1a%2C%20quisiera%20hacer%20un%20pedido" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.7-.9c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.1.1.6-.1 1.3z"/></svg>
+</a>
+<div class="cartbar" id="cartbar">
+  <div class="cin">
+    <div class="lbl">🧾 Cotización: <span id="cartcount">0</span> producto(s)</div>
+    <div class="cbtns">
+      <button class="btn btn-open" id="openCart">Ver lista</button>
+      <button class="btn btn-wa" id="sendCart">Enviar por WhatsApp</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="mh"><h3>Tu cotización</h3><button id="closeCart" aria-label="Cerrar">✕</button></div>
+    <div class="ml" id="cartList"></div>
+    <div class="mf">
+      <div class="bizrow" id="bizrow">
+        <label for="bizName">Nombre comercial (tu negocio) *</label>
+        <input id="bizName" type="text" placeholder="Ej: Tienda Latina San Cristóbal" autocomplete="organization">
+      </div>
+      <button class="btn btn-wa" id="sendCart2">Enviar cotización por WhatsApp</button>
+      <p class="note">Te responderemos con precios, stock y disponibilidad. Sin compromiso.</p>
+    </div>
+  </div>
+</div>
+<script src="productos.js"></script>
+<script>
+const WA="34722176155";
+const $=s=>document.querySelector(s);
+document.getElementById('yr').textContent=new Date().getFullYear();
+let activeCat="todos", term="", cart={}, units={}, bizName="";
+const UNITLABEL={unidad:"Unidad",caja:"Caja",display:"Display"};
+
+const chipBox=$('#chips');
+function catCount(c){return c==="todos"?PRODUCTS.length:PRODUCTS.filter(p=>p.c===c).length}
+let chipsHtml=`<button class="chip active" data-c="todos">Todos<span class="n">${PRODUCTS.length}</span></button>`;
+CATS.forEach(([id,label])=>{chipsHtml+=`<button class="chip" data-c="${id}">${label}<span class="n">${catCount(id)}</span></button>`});
+chipBox.innerHTML=chipsHtml;
+chipBox.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+  activeCat=b.dataset.c;[...chipBox.children].forEach(c=>c.classList.toggle('active',c===b));render();});
+
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+$('#q').addEventListener('input',e=>{term=norm(e.target.value.trim());$('#clr').style.display=term?'block':'none';render();});
+$('#clr').addEventListener('click',()=>{term="";$('#q').value="";$('#clr').style.display='none';render();$('#q').focus();});
+const catLabel=id=>{const f=CATS.find(c=>c[0]===id);return f?f[1]:""};
+
+function isBev(p){return !!p&&(p.c==='cervezas'||p.c==='bebidas')}
+function defUnit(id){return isBev(PRODUCTS.find(x=>x.id===id))?'caja':'unidad'}
+function actsHtml(id){
+  const q=cart[id]||0, bev=isBev(PRODUCTS.find(x=>x.id===id)), u=units[id]||defUnit(id);
+  const opts = bev
+    ? `<option value="caja" selected>Caja</option>`
+    : `<option value="unidad"${u==='unidad'?' selected':''}>Unidad</option>`
+      +`<option value="caja"${u==='caja'?' selected':''}>Caja</option>`
+      +`<option value="display"${u==='display'?' selected':''}>Display</option>`;
+  return `<div class="qrow${q>0?' on':''}">`
+    +`<span class="qlbl">${q>0?'✓ En cotización':'Cantidad y presentación'}</span>`
+    +`<select class="qunit" data-unit="${id}">`+opts+`</select>`
+    +`<div class="qstep">`
+      +`<button class="qb" data-dec="${id}" aria-label="Menos">−</button>`
+      +`<input type="number" min="0" inputmode="numeric" data-qty="${id}" value="${q}">`
+      +`<button class="qb" data-inc="${id}" aria-label="Más">＋</button>`
+    +`</div></div>`;
+}
+function renderActs(id){const el=document.querySelector(`[data-acts="${id}"]`);if(el)el.innerHTML=actsHtml(id);}
+function setQty(id,q){q=Math.max(0,Math.floor(q||0));if(q<1)delete cart[id];else cart[id]=q;renderActs(id);updateCart();}
+
+const grid=$('#grid');
+function render(){
+  let list=PRODUCTS.filter(p=>(activeCat==="todos"||p.c===activeCat));
+  if(term){list=list.filter(p=>norm(p.n).includes(term)||norm(p.d).includes(term)||norm(catLabel(p.c)).includes(term))}
+  $('#count').textContent=`${list.length} producto${list.length!==1?'s':''}`+(activeCat!=="todos"?` en ${catLabel(activeCat)}`:'')+(term?` · "${$('#q').value}"`:'');
+  $('#empty').style.display=list.length?'none':'block';
+  grid.innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="ph"><img loading="lazy" src="${p.img}" alt="${p.n}"></div>
+      <div class="body">
+        <div class="cat">${catLabel(p.c)}</div>
+        <h3>${p.n}</h3>
+        <span class="fmt">${p.f}</span>
+        <p class="desc">${p.d}</p>
+        ${p.c==='cervezas'?'<div class="age">🔞 Venta solo a mayores de 18 años</div>':''}
+        <div class="price">💬 Precio a consultar</div>
+        <div class="acts" data-acts="${p.id}">${actsHtml(p.id)}</div>
+      </div>
+    </div>`).join('');
+}
+grid.addEventListener('click',e=>{
+  const add=e.target.closest('[data-add]'),inc=e.target.closest('[data-inc]'),dec=e.target.closest('[data-dec]'),rm=e.target.closest('[data-rm]');
+  if(add)setQty(add.dataset.add,1);
+  else if(inc)setQty(inc.dataset.inc,(cart[inc.dataset.inc]||0)+1);
+  else if(dec)setQty(dec.dataset.dec,(cart[dec.dataset.dec]||1)-1);
+  else if(rm)setQty(rm.dataset.rm,0);
+});
+grid.addEventListener('input',e=>{const inp=e.target.closest('[data-qty]');if(!inp)return;if(inp.value==='')return;const v=parseInt(inp.value,10);if(!v||v<1){setQty(inp.dataset.qty,0);}else{cart[inp.dataset.qty]=v;updateCart();}});
+grid.addEventListener('change',e=>{
+  const inp=e.target.closest('[data-qty]'); const sel=e.target.closest('[data-unit]');
+  if(inp){let v=parseInt(inp.value,10);if(!v||v<1)setQty(inp.dataset.qty,0);else{cart[inp.dataset.qty]=v;renderActs(inp.dataset.qty);updateCart();}}
+  else if(sel){units[sel.dataset.unit]=sel.value;updateCart();}
+});
+
+function cartItems(){return Object.keys(cart).map(id=>({...PRODUCTS.find(p=>p.id===id),q:cart[id],u:units[id]||defUnit(id)}))}
+function updateCart(){
+  const items=cartItems();const n=items.reduce((a,b)=>a+b.q,0);
+  $('#cartcount').textContent=n;
+  $('#cartbar').classList.toggle('show',items.length>0);
+  const box=$('#cartList');
+  if(!items.length){box.innerHTML='<div class="mempty">Tu cotización está vacía.<br>Ajustá la cantidad (con + o escribiéndola) en los productos que necesites.</div>';return;}
+  box.innerHTML=items.map(p=>`
+    <div class="qitem">
+      <img src="${p.img}" alt="">
+      <div class="qi"><b>${p.n}</b><small>${p.f} · ${UNITLABEL[p.u]}</small></div>
+      <div class="qty"><button data-dec="${p.id}">−</button><span>${p.q}</span><button data-inc="${p.id}">+</button></div>
+      <button class="rm" data-rm="${p.id}">Quitar</button>
+    </div>`).join('');
+}
+$('#cartList').addEventListener('click',e=>{
+  const inc=e.target.closest('[data-inc]'),dec=e.target.closest('[data-dec]'),rm=e.target.closest('[data-rm]');
+  if(inc){setQty(inc.dataset.inc,(cart[inc.dataset.inc]||0)+1);}
+  else if(dec){setQty(dec.dataset.dec,(cart[dec.dataset.dec]||1)-1);}
+  else if(rm){setQty(rm.dataset.rm,0);}
+});
+$('#bizName').addEventListener('input',e=>{bizName=e.target.value;if(bizName.trim())$('#bizrow').classList.remove('err');});
+
+function openModal(){$('#overlay').classList.add('show');}
+function closeModal(){$('#overlay').classList.remove('show');}
+function sendCart(){
+  const items=cartItems();
+  if(!items.length){alert('Agregá al menos un producto a la cotización.');return;}
+  if(!bizName.trim()){
+    openModal();
+    $('#bizrow').classList.add('err');
+    $('#bizName').focus();
+    $('#bizName').scrollIntoView({block:'center'});
+    alert('Por favor indicá tu nombre comercial antes de enviar.');
+    return;
+  }
+  const hasAlc=items.some(p=>p.c==='cervezas');
+  let msg='Hola Grupo Cenepeña 👋, quisiera cotizar estos productos:\n';
+  msg+='🏪 Nombre comercial: '+bizName.trim()+'\n\n';
+  items.forEach(p=>{msg+=`• ${p.n} (${p.f}) x${p.q} · ${UNITLABEL[p.u]}\n`});
+  if(hasAlc){msg+='\n🔞 Declaro ser mayor de 18 años para los productos con alcohol.';}
+  msg+='\n\n¿Me pasan precios y disponibilidad? Gracias.';
+  window.open(`https://wa.me/${WA}?text=`+encodeURIComponent(msg),'_blank');
+}
+$('#sendCart').addEventListener('click',sendCart);
+$('#sendCart2').addEventListener('click',sendCart);
+$('#openCart').addEventListener('click',openModal);
+$('#closeCart').addEventListener('click',closeModal);
+$('#overlay').addEventListener('click',e=>{if(e.target===$('#overlay'))closeModal()});
+$('#fab').addEventListener('click',function(e){ if(cartItems().length){e.preventDefault();sendCart();} });
+
+render();updateCart();
+</script>
+</body>
+</html>
