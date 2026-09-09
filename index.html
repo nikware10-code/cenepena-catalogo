@@ -335,7 +335,7 @@ grid.addEventListener('change',e=>{
   else if(sel){units[sel.dataset.unit]=sel.value;updateCart();}
 });
 
-function cartItems(){return Object.keys(cart).map(id=>({...PRODUCTS.find(p=>p.id===id),q:cart[id],u:units[id]||defUnit(id)}))}
+function cartItems(){return Object.keys(cart).filter(id=>PRODUCTS.some(p=>p.id===id)).map(id=>({...PRODUCTS.find(p=>p.id===id),q:cart[id],u:units[id]||defUnit(id)}))}
 function updateCart(){
   const items=cartItems();const n=items.reduce((a,b)=>a+b.q,0);
   $('#cartcount').textContent=n;
@@ -372,11 +372,18 @@ function sendCart(){
     return;
   }
   const hasAlc=items.some(p=>p.c==='cervezas');
-  let msg='Hola Grupo Cenepeña 👋, quisiera cotizar estos productos:\n';
-  msg+='🏪 Nombre comercial: '+bizName.trim()+'\n\n';
-  items.forEach(p=>{msg+=`• ${p.n} (${p.f}) x${p.q} · ${UNITLABEL[p.u]}\n`});
-  if(hasAlc){msg+='\n🔞 Declaro ser mayor de 18 años para los productos con alcohol.';}
-  msg+='\n\n¿Me pasan precios y disponibilidad? Gracias.';
+  const totalU=items.reduce((a,p)=>a+p.q,0);
+  let msg='*PEDIDO — '+bizName.trim()+'*\n';
+  msg+='_'+items.length+(items.length===1?' línea':' líneas')+' · '+totalU+' uds._\n';
+  CATS.forEach(function(c){
+    const cid=c[0], cname=c[1];
+    const g=items.filter(p=>p.c===cid);
+    if(!g.length) return;
+    msg+='\n*'+cname.toUpperCase()+'*\n';
+    g.forEach(p=>{ msg+='• '+p.n+'\n  '+p.f+' — *'+p.q+'* '+UNITLABEL[p.u]+'\n'; });
+  });
+  if(hasAlc){msg+='\n*+18* Declaro ser mayor de 18 años para los productos con alcohol.\n';}
+  msg+='\n¿Me pasan precios y disponibilidad?\nGracias.';
   window.open(`https://wa.me/${WA}?text=`+encodeURIComponent(msg),'_blank');
 }
 $('#sendCart').addEventListener('click',sendCart);
@@ -389,4 +396,4 @@ $('#fab').addEventListener('click',function(e){ if(cartItems().length){e.prevent
 render();updateCart();
 </script>
 </body>
-</html>
+                        </html>
