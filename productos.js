@@ -10,6 +10,7 @@ const PRODUCTS=[
   {"id": "hb_cinta", "n": "Fideo Cinta Nido Hildebrand", "c": "pastas", "f": "Paquete 400 g", "d": "Fideos cinta al nido Hildebrand.", "img": "img/hb_cinta.jpg"},
   {"id": "campo9_tallarin_fino", "n": "Tallarín Fino Campo 9", "c": "pastas", "f": "Paquete 400 g", "d": "Tallarín fino Campo 9, vitaminado con huevo.", "img": "img/campo9_tallarin_fino.jpg"},
   {"id": "anita_monito", "n": "Fideo Moñito Anita", "c": "pastas", "f": "Paquete 400 g", "d": "Fideos moñito Anita, 100% trigo natural.", "img": "img/anita_monito.jpg"},
+  {"id": "anita_dedalito", "n": "Fideo Dedalito Anita", "c": "pastas", "f": "Paquete 400 g", "d": "Fideos dedalito Anita, 100% trigo natural.", "img": "img/anita_dedalito.jpg"},
   {"id": "anita_spaguetti_nido", "n": "Spaguetti Nido Anita", "c": "pastas", "f": "Paquete 400 g", "d": "Spaguetti al nido Anita, 100% trigo natural.", "img": "img/anita_spaguetti_nido.jpg"},
   {"id": "anita_tallarin_laminado", "n": "Tallarín Laminado Grueso Anita", "c": "pastas", "f": "Paquete 400 g", "d": "Tallarín laminado grueso Anita, 100% trigo natural.", "img": "img/anita_tallarin_laminado.jpg"},
   {"id": "napoli_tallarin_amarillo", "n": "Tallarín Amarillo Napoli", "c": "pastas", "f": "Paquete 400 g", "d": "Tallarín amarillo Napoli, sin colesterol.", "img": "img/napoli_tallarin_amarillo.jpg"},
