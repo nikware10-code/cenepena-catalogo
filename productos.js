@@ -11,6 +11,7 @@ const PRODUCTS=[
   {"id": "anita_tallarin_laminado", "n": "Tallarín Laminado Grueso Anita", "c": "pastas", "f": "Paquete 400 g", "d": "Tallarín laminado grueso Anita, 100% trigo natural.", "img": "img/anita_tallarin_laminado.jpg"},
   {"id": "napoli_spaguetti", "n": "Spaguetti Napoli", "c": "pastas", "f": "Paquete 400 g", "d": "Spaguetti al nido Napoli, sin colesterol.", "img": "img/napoli_spaguetti.jpg"},
   {"id": "napoli_cortadito", "n": "Fideo Cortadito Napoli", "c": "pastas", "f": "Paquete 400 g", "d": "Fideos cortaditos Napoli, industria paraguaya.", "img": "img/napoli_cortadito.jpg"},
+  {"id": "napoli_tallarin_verde", "n": "Tallarín Verde Napoli", "c": "pastas", "f": "Paquete 400 g", "d": "Tallarín verde Napoli, industria paraguaya.", "img": "img/napoli_tallarin_verde.jpg"},
   {"id": "pajarito_clasico", "n": "Yerba Mate Pajarito Clásica", "c": "yerba", "f": "Paquete 1 kg", "d": "Yerba mate elaborada Pajarito, clásica.", "img": "img/pajarito_clasico.jpg"},
   {"id": "pajarito_menta_limon", "n": "Yerba Pajarito Menta y Limón", "c": "yerba", "f": "Paquete 500 g", "d": "Yerba compuesta Pajarito con menta y limón.", "img": "img/pajarito_menta_limon.jpg"},
   {"id": "pajarito_500g", "n": "Yerba Mate Pajarito 500 g", "c": "yerba", "f": "Paquete 500 g", "d": "Yerba mate elaborada Pajarito, presentación de 500 g.", "img": "img/pajarito_500g.jpg"},
